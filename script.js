@@ -44,7 +44,6 @@
         subtitle: 'Від першого рядка коду до власного проєкту в портфоліо. Живі заняття двічі на тиждень, практика після кожної теми та відповіді на всі запитання.',
         cta: 'Записатися на курс',
         secondary: 'Дивитися програму',
-        sticker: 'практика',
         chipWeeks: 'тижнів<br>навчання',
         chipTasks: 'практичних<br>завдань'
       },
@@ -196,7 +195,6 @@
         subtitle: 'From your first line of code to a project in your portfolio. Live classes twice a week, practice after every topic and answers to all your questions.',
         cta: 'Enroll in the course',
         secondary: 'View curriculum',
-        sticker: 'practice',
         chipWeeks: 'weeks of<br>learning',
         chipTasks: 'practice<br>tasks'
       },

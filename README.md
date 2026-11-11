@@ -17,14 +17,14 @@ https://blessedrbls.github.io/landing-course/
 - **Pricing** with three plans; the middle one is highlighted as the most popular. "Choose plan" buttons pre-select the plan in the form.
 - **Signup form** with client-side validation (name, email, phone, plan), localized error messages and a success state. No data is sent anywhere — see the comment in the `submit` handler in `script.js` for where to connect a backend.
 - **Scroll reveal animations** via `IntersectionObserver`, disabled for users with `prefers-reduced-motion`.
-- Neo-brutalist light design: cream background, a single saturated orange accent, bold outlines and hard shadows, a running-line strip.
+- Clean light design with a single saturated accent colour, a dark code window and a running-line strip.
 
 ## Tech stack
 
 - HTML5
 - CSS3 (custom properties, Grid, Flexbox, `clamp()`)
 - Vanilla JavaScript (ES2018+)
-- [Google Fonts](https://fonts.google.com/): Rubik, JetBrains Mono
+- [Google Fonts](https://fonts.google.com/): Geologica, Onest, JetBrains Mono
 
 ## Project structure
 
@@ -52,7 +52,7 @@ To change the course start date, edit `COURSE_START` in `script.js`.
 ## Image credits
 
 - `images/teacher.jpg` — photo by [Joseph Gonzalez](https://unsplash.com/@miracletwentyone) on [Unsplash](https://unsplash.com/photos/iFgRcqHznqg), free to use under the [Unsplash License](https://unsplash.com/license). The person in the photo is not affiliated with this project.
-- `images/favicon.svg`, all icons, the sticker and the hero illustration — hand-written SVG / HTML & CSS made for this project.
+- `images/favicon.svg`, all icons and the hero illustration — hand-written SVG / HTML & CSS made for this project.
 
 ---
 

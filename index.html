@@ -5,15 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Python з нуля за 8 тижнів — онлайн-курс</title>
   <meta name="description" content="Онлайн-курс Python для початківців: 8 тижнів, практика щотижня та власний проєкт у портфоліо.">
-  <meta name="theme-color" content="#FF4D14">
+  <meta name="theme-color" content="#2F5BFF">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      // TEMP: palette choice (remove together with palette-switcher.js)
+      try {
+        var p = new URLSearchParams(location.search).get('palette') || localStorage.getItem('pystart-palette');
+        if (p && p !== 'blue') d.dataset.palette = p;
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -21,7 +31,7 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#top" class="logo" aria-label="PyStart">
-        <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="12"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
+        <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect width="64" height="64" rx="16"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
         <span>PyStart</span>
       </a>
 
@@ -92,10 +102,6 @@ weeks = <span class="c-num">8</span>
             <div class="code-window__out">
               <span class="c-prompt">›</span> <span data-i18n="code.output"></span><span class="caret"></span>
             </div>
-          </div>
-          <div class="sticker" aria-hidden="true">
-            <svg viewBox="0 0 100 100"><polygon points="50.0,2.0 57.6,11.7 68.4,5.7 71.7,17.6 83.9,16.1 82.4,28.3 94.3,31.6 88.3,42.4 98.0,50.0 88.3,57.6 94.3,68.4 82.4,71.7 83.9,83.9 71.7,82.4 68.4,94.3 57.6,88.3 50.0,98.0 42.4,88.3 31.6,94.3 28.3,82.4 16.1,83.9 17.6,71.7 5.7,68.4 11.7,57.6 2.0,50.0 11.7,42.4 5.7,31.6 17.6,28.3 16.1,16.1 28.3,17.6 31.6,5.7 42.4,11.7"/></svg>
-            <span><strong>100%</strong><em data-i18n="hero.sticker"></em></span>
           </div>
           <div class="chip chip--one"><strong>8</strong><span data-i18n="hero.chipWeeks"></span></div>
           <div class="chip chip--two"><strong>40+</strong><span data-i18n="hero.chipTasks"></span></div>
@@ -243,7 +249,7 @@ weeks = <span class="c-num">8</span>
     <div class="container footer__inner">
       <div class="footer__brand">
         <a href="#top" class="logo">
-          <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="12"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
+          <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect width="64" height="64" rx="16"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
           <span>PyStart</span>
         </a>
         <p data-i18n="footer.tagline"></p>
@@ -264,5 +270,6 @@ weeks = <span class="c-num">8</span>
   </footer>
 
   <script src="script.js"></script>
+  <script src="palette-switcher.js"></script>
 </body>
 </html>
