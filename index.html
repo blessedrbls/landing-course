@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python з нуля за 8 тижнів — онлайн-курс</title>
+  <meta name="description" content="Онлайн-курс Python для початківців: 8 тижнів, практика щотижня та власний проєкт у портфоліо.">
+  <meta name="theme-color" content="#FF4D14">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- ========== Header ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="PyStart">
+        <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="12"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
+        <span>PyStart</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#audience" data-i18n="nav.audience"></a>
+        <a href="#program" data-i18n="nav.program"></a>
+        <a href="#teacher" data-i18n="nav.teacher"></a>
+        <a href="#pricing" data-i18n="nav.pricing"></a>
+        <a href="#reviews" data-i18n="nav.reviews"></a>
+        <a href="#faq" data-i18n="nav.faq"></a>
+      </nav>
+
+      <div class="header__actions">
+        <div class="lang" role="group" aria-label="Мова / Language">
+          <button type="button" class="lang__btn" data-lang="uk" aria-pressed="true">UA</button>
+          <button type="button" class="lang__btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="#signup" class="btn btn--primary btn--sm header__cta" data-i18n="nav.cta"></a>
+        <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ========== 1. Hero ========== -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="badge reveal"><span class="badge__dot"></span><span id="heroBadge"></span></p>
+          <h1 class="hero__title reveal" data-i18n-html="hero.title"></h1>
+          <p class="hero__subtitle reveal" data-i18n="hero.subtitle"></p>
+
+          <div class="hero__buttons reveal">
+            <a href="#signup" class="btn btn--primary btn--lg" data-i18n="hero.cta"></a>
+            <a href="#program" class="btn btn--ghost btn--lg" data-i18n="hero.secondary"></a>
+          </div>
+
+          <div class="countdown reveal" aria-live="off">
+            <p class="countdown__label" id="countdownLabel"></p>
+            <div class="countdown__grid" id="countdown">
+              <div class="countdown__cell"><span class="countdown__num" data-unit="days">00</span><span class="countdown__unit" data-i18n="countdown.days"></span></div>
+              <div class="countdown__cell"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__unit" data-i18n="countdown.hours"></span></div>
+              <div class="countdown__cell"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__unit" data-i18n="countdown.minutes"></span></div>
+              <div class="countdown__cell"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__unit" data-i18n="countdown.seconds"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="blob" aria-hidden="true"></div>
+          <div class="code-window" aria-hidden="true">
+            <div class="code-window__bar">
+              <span></span><span></span><span></span>
+              <em>first_steps.py</em>
+            </div>
+<pre class="code-window__body"><code><span class="c-com" data-i18n="code.comment"></span>
+<span class="c-key">def</span> <span class="c-fn">greet</span>(name):
+    <span class="c-key">return</span> <span class="c-str" data-i18n="code.string"></span>
+
+weeks = <span class="c-num">8</span>
+<span class="c-key">for</span> week <span class="c-key">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, weeks + <span class="c-num">1</span>):
+    <span class="c-fn">print</span>(<span class="c-str" data-i18n="code.loop"></span>)
+
+<span class="c-fn">print</span>(greet(<span class="c-str" data-i18n="code.name"></span>))</code></pre>
+            <div class="code-window__out">
+              <span class="c-prompt">›</span> <span data-i18n="code.output"></span><span class="caret"></span>
+            </div>
+          </div>
+          <div class="sticker" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><polygon points="50.0,2.0 57.6,11.7 68.4,5.7 71.7,17.6 83.9,16.1 82.4,28.3 94.3,31.6 88.3,42.4 98.0,50.0 88.3,57.6 94.3,68.4 82.4,71.7 83.9,83.9 71.7,82.4 68.4,94.3 57.6,88.3 50.0,98.0 42.4,88.3 31.6,94.3 28.3,82.4 16.1,83.9 17.6,71.7 5.7,68.4 11.7,57.6 2.0,50.0 11.7,42.4 5.7,31.6 17.6,28.3 16.1,16.1 28.3,17.6 31.6,5.7 42.4,11.7"/></svg>
+            <span><strong>100%</strong><em data-i18n="hero.sticker"></em></span>
+          </div>
+          <div class="chip chip--one"><strong>8</strong><span data-i18n="hero.chipWeeks"></span></div>
+          <div class="chip chip--two"><strong>40+</strong><span data-i18n="hero.chipTasks"></span></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="stats reveal" id="stats"></ul>
+      </div>
+    </section>
+
+    <!-- Running line -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee"></div>
+    </div>
+
+    <!-- ========== 2. Audience ========== -->
+    <section class="section" id="audience">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="audience.eyebrow"></p>
+          <h2 data-i18n="audience.title"></h2>
+          <p class="section__lead" data-i18n="audience.lead"></p>
+        </header>
+        <div class="cards" id="audienceCards"></div>
+      </div>
+    </section>
+
+    <!-- ========== 3. Program ========== -->
+    <section class="section section--tint" id="program">
+      <div class="container program">
+        <header class="section__head section__head--left reveal">
+          <p class="eyebrow" data-i18n="program.eyebrow"></p>
+          <h2 data-i18n="program.title"></h2>
+          <p class="section__lead" data-i18n="program.lead"></p>
+          <a href="#signup" class="btn btn--primary" data-i18n="program.cta"></a>
+        </header>
+        <div class="accordion reveal" id="programList"></div>
+      </div>
+    </section>
+
+    <!-- ========== 4. Teacher ========== -->
+    <section class="section" id="teacher">
+      <div class="container teacher">
+        <div class="teacher__photo reveal">
+          <img src="images/teacher.jpg" alt="" id="teacherPhoto" width="800" height="960" loading="lazy">
+          <div class="teacher__tag"><strong>9</strong><span data-i18n="teacher.tag"></span></div>
+        </div>
+        <div class="teacher__body reveal">
+          <p class="eyebrow" data-i18n="teacher.eyebrow"></p>
+          <h2 data-i18n="teacher.name"></h2>
+          <p class="teacher__role" data-i18n="teacher.role"></p>
+          <p data-i18n="teacher.bio"></p>
+          <ul class="checklist" id="teacherFacts"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 5. Pricing ========== -->
+    <section class="section section--tint" id="pricing">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="pricing.eyebrow"></p>
+          <h2 data-i18n="pricing.title"></h2>
+          <p class="section__lead" data-i18n="pricing.lead"></p>
+        </header>
+        <div class="plans" id="plans"></div>
+      </div>
+    </section>
+
+    <!-- ========== 6. Reviews ========== -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="reviews.eyebrow"></p>
+          <h2 data-i18n="reviews.title"></h2>
+        </header>
+        <div class="reviews" id="reviewList"></div>
+      </div>
+    </section>
+
+    <!-- ========== 7. FAQ ========== -->
+    <section class="section section--tint" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="faq.eyebrow"></p>
+          <h2 data-i18n="faq.title"></h2>
+        </header>
+        <div class="accordion reveal" id="faqList"></div>
+      </div>
+    </section>
+
+    <!-- ========== 8. Signup form ========== -->
+    <section class="section signup" id="signup">
+      <div class="container signup__grid">
+        <div class="signup__text reveal">
+          <p class="eyebrow eyebrow--light" data-i18n="signup.eyebrow"></p>
+          <h2 data-i18n="signup.title"></h2>
+          <p data-i18n="signup.lead"></p>
+          <ul class="checklist checklist--light" id="signupPoints"></ul>
+        </div>
+
+        <div class="form-card reveal">
+          <form id="signupForm" novalidate>
+            <div class="field">
+              <label for="name" data-i18n="form.name"></label>
+              <input type="text" id="name" name="name" autocomplete="name" data-i18n-placeholder="form.namePh">
+              <p class="field__error" data-error-for="name" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="email" data-i18n="form.email"></label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+              <p class="field__error" data-error-for="email" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="phone" data-i18n="form.phone"></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+380 XX XXX XX XX">
+              <p class="field__error" data-error-for="phone" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="plan" data-i18n="form.plan"></label>
+              <select id="plan" name="plan"></select>
+              <p class="field__error" data-error-for="plan" role="alert"></p>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg btn--block" data-i18n="form.submit"></button>
+            <p class="form-note" data-i18n="form.note"></p>
+          </form>
+
+          <div class="success" id="formSuccess" hidden tabindex="-1">
+            <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+              <circle cx="32" cy="32" r="30" fill="currentColor" opacity=".12"/>
+              <path d="M20 33l8 8 16-18" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 data-i18n="form.successTitle"></h3>
+            <p id="successText"></p>
+            <button type="button" class="btn btn--ghost" id="formReset" data-i18n="form.again"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== 9. Footer ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="logo">
+          <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="12"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
+          <span>PyStart</span>
+        </a>
+        <p data-i18n="footer.tagline"></p>
+      </div>
+
+      <ul class="socials" aria-label="Social media">
+        <li><a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.5-.6-.2L6.200 13.100 1.400 11.600c-1-.3-1.1-1 .2-1.500L20.500 2.800c.9-.3 1.700.2 1.400 1.500z"/></svg></a></li>
+        <li><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.700 4.700 4.700 0 0 0 12 7.300zm0 7.700a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.900a1.100 1.100 0 1 1-2.200 0 1.100 1.100 0 0 1 2.200 0zM21.100 8.200c-.1-1.500-.4-2.800-1.500-3.800-1-1.100-2.300-1.400-3.800-1.500-1.500-.1-6.100-.1-7.600 0-1.500.1-2.800.4-3.800 1.500C3.300 5.400 3 6.700 2.900 8.200c-.1 1.500-.1 6.100 0 7.600.1 1.500.4 2.800 1.500 3.800 1 1.100 2.300 1.400 3.800 1.500 1.500.1 6.100.1 7.600 0 1.500-.1 2.800-.4 3.800-1.500 1.100-1 1.400-2.300 1.500-3.800.1-1.500.1-6.100 0-7.600zm-2 9.200a3.100 3.100 0 0 1-1.700 1.700c-1.200.5-4 .4-5.400.4s-4.200.1-5.400-.4a3.100 3.100 0 0 1-1.700-1.700c-.5-1.200-.4-4-.4-5.400s-.1-4.200.4-5.400a3.100 3.100 0 0 1 1.700-1.700c1.200-.5 4-.4 5.400-.4s4.200-.1 5.400.4a3.100 3.100 0 0 1 1.700 1.700c.5 1.200.4 4 .4 5.400s.1 4.200-.4 5.400z"/></svg></a></li>
+        <li><a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.500 7.200a2.800 2.800 0 0 0-2-2C18.800 4.700 12 4.700 12 4.700s-6.800 0-8.500.5a2.800 2.800 0 0 0-2 2C1 8.900 1 12 1 12s0 3.100.5 4.800a2.800 2.800 0 0 0 2 2c1.700.5 8.500.5 8.500.5s6.800 0 8.500-.5a2.800 2.800 0 0 0 2-2c.5-1.700.5-4.800.5-4.800s0-3.100-.5-4.800zM9.800 15.300V8.700l5.700 3.300-5.700 3.300z"/></svg></a></li>
+        <li><a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.800a10.300 10.300 0 0 0-3.300 20c.5.1.7-.2.7-.5v-1.900c-2.900.6-3.500-1.200-3.500-1.200-.5-1.200-1.100-1.500-1.100-1.500-.9-.6.1-.6.1-.6 1 .1 1.600 1.100 1.600 1.100.9 1.600 2.400 1.100 3 .9.1-.7.4-1.100.7-1.400-2.300-.3-4.700-1.100-4.700-5.100 0-1.100.4-2 1.100-2.800-.1-.3-.5-1.300.1-2.700 0 0 .9-.3 2.800 1.100a9.800 9.800 0 0 1 5.200 0c2-1.300 2.800-1.100 2.800-1.100.6 1.400.2 2.400.1 2.700.7.800 1.100 1.700 1.100 2.800 0 4-2.400 4.800-4.700 5.100.4.300.7.900.7 1.900v2.800c0 .3.2.6.7.5A10.300 10.300 0 0 0 12 1.800z"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="container footer__bottom">
+      <p data-i18n="footer.disclaimer"></p>
+      <p data-i18n-html="footer.credit">Демо-проєкт. Сайт розробив <a href="https://t.me/nonelyyo" target="_blank" rel="noopener">@nonelyyo</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
