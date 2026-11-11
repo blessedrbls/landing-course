@@ -13,17 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-  <script>
-    (function () {
-      var d = document.documentElement;
-      d.classList.add('js');
-      // TEMP: palette choice (remove together with palette-switcher.js)
-      try {
-        var p = new URLSearchParams(location.search).get('palette') || localStorage.getItem('pystart-palette');
-        if (p && p !== 'blue') d.dataset.palette = p;
-      } catch (e) {}
-    })();
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -270,6 +260,5 @@ weeks = <span class="c-num">8</span>
   </footer>
 
   <script src="script.js"></script>
-  <script src="palette-switcher.js"></script>
 </body>
 </html>
