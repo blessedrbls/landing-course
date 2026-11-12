@@ -985,12 +985,28 @@
     let easedY = 0.5;
     let scrollShift = 0;
 
-    // each ribbon: base height, colours bottom → middle, motion settings
-    const RIBBONS = [
-      { y: 0.34, height: 0.42, a: [79, 227, 180], b: [99, 196, 255], alpha: 0.8, speed: 0.22, wave: 2.1, phase: 0.0 },
-      { y: 0.52, height: 0.36, a: [140, 134, 255], b: [199, 156, 255], alpha: 0.66, speed: -0.17, wave: 1.6, phase: 2.1 },
-      { y: 0.72, height: 0.3, a: [111, 233, 210], b: [255, 159, 222], alpha: 0.56, speed: 0.13, wave: 2.6, phase: 4.2 }
+    // colours the light flows through: mint → sky → lavender → pink → back
+    const PALETTE = [
+      [79, 227, 180], [99, 196, 255], [140, 134, 255], [199, 140, 255], [255, 150, 214], [111, 233, 210]
     ];
+    // each ribbon: base height, motion settings and its place in the palette
+    const RIBBONS = [
+      { y: 0.34, height: 0.42, hue: 0.0, alpha: 0.8, speed: 0.22, wave: 2.1, phase: 0.0 },
+      { y: 0.52, height: 0.36, hue: 2.2, alpha: 0.66, speed: -0.17, wave: 1.6, phase: 2.1 },
+      { y: 0.72, height: 0.3, hue: 4.1, alpha: 0.56, speed: 0.13, wave: 2.6, phase: 4.2 }
+    ];
+
+    // smooth colour at any point of the looping palette
+    function paletteAt(pos) {
+      const n = PALETTE.length;
+      const p = ((pos % n) + n) % n;
+      const i = Math.floor(p);
+      const f = p - i;
+      const s = f * f * (3 - 2 * f);
+      const c1 = PALETTE[i];
+      const c2 = PALETTE[(i + 1) % n];
+      return [0, 1, 2].map((k) => Math.round(c1[k] + (c2[k] - c1[k]) * s));
+    }
 
     function resize() {
       w = Math.max(80, Math.round(window.innerWidth * SCALE));
@@ -1010,8 +1026,12 @@
       RIBBONS.forEach((r, ri) => {
         const lean = (easedX - 0.5) * 0.7 * (ri % 2 ? -1 : 1);
         const lift = (easedY - 0.5) * 0.06 + scrollShift * (0.05 + ri * 0.03);
+        // the colours keep flowing: along the ribbon and over time
+        const drift = t * 0.32 + r.hue;
         for (let x = 0; x <= w; x += 2) {
           const u = x / w;
+          const ca = paletteAt(drift + u * 1.6);
+          const cb = paletteAt(drift + u * 1.6 + 1.3);
           // the curtain line slowly folds and travels sideways
           const fold =
             Math.sin(u * r.wave * 3.1 + t * r.speed * 5.5 + r.phase + lean * 4) * 0.12 +
@@ -1023,10 +1043,10 @@
           const top = base - r.height * h * (0.4 + 0.6 * ray);
           const alpha = r.alpha * (0.25 + 0.75 * pulse) * (0.35 + 0.65 * ray);
           const grad = ctx.createLinearGradient(0, base + h * 0.04, 0, top);
-          grad.addColorStop(0, rgba(r.a, 0));
-          grad.addColorStop(0.12, rgba(r.a, alpha));
-          grad.addColorStop(0.45, rgba(r.b, alpha * 0.7));
-          grad.addColorStop(1, rgba(r.b, 0));
+          grad.addColorStop(0, rgba(ca, 0));
+          grad.addColorStop(0.12, rgba(ca, alpha));
+          grad.addColorStop(0.45, rgba(cb, alpha * 0.7));
+          grad.addColorStop(1, rgba(cb, 0));
           ctx.fillStyle = grad;
           ctx.fillRect(x, top, 2.6, base + h * 0.04 - top);
         }
