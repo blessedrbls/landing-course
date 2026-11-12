@@ -780,37 +780,14 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   pointer-events: none;
   background: linear-gradient(180deg, #e6fbf3 0%, #e9f0ff 45%, #f3eaff 100%);
 }
-/* two layers of light curtains that sway in opposite directions */
-.aurora__curtain::before,
-.aurora__curtain::after {
-  content: "";
+/* living light ribbons, drawn by script.js at low resolution and blurred up */
+.aurora__canvas {
   position: absolute;
-  top: -15%;
-  bottom: -15%;
-  left: -20%;
-  width: 240%;
-  filter: blur(44px);
-  will-change: transform;
-}
-.aurora__curtain::before {
-  background-image: repeating-linear-gradient(104deg, #4fe3b4 0%, #63c4ff 5%, #8c86ff 10%, #c79cff 15%, #4fe3b4 20%);
-  opacity: .5;
-  animation: curtain-a 26s ease-in-out infinite alternate;
-}
-.aurora__curtain::after {
-  background-image: repeating-linear-gradient(78deg, transparent 0%, #6fe9d2 6%, transparent 12%, #7aa2ff 18%, transparent 24%);
-  opacity: .42;
-  animation: curtain-b 34s ease-in-out infinite alternate;
-}
-@keyframes curtain-a {
-  from { transform: translate3d(0, 0, 0) skewX(0deg) scaleY(1); }
-  50% { transform: translate3d(-22%, 2%, 0) skewX(-7deg) scaleY(1.08); }
-  to { transform: translate3d(-44%, -1%, 0) skewX(5deg) scaleY(.96); }
-}
-@keyframes curtain-b {
-  from { transform: translate3d(-46%, 0, 0) skewX(6deg) scaleY(1.05); }
-  50% { transform: translate3d(-20%, -2%, 0) skewX(-5deg) scaleY(.94); }
-  to { transform: translate3d(0, 1%, 0) skewX(3deg) scaleY(1.1); }
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(16px) saturate(1.2);
+  opacity: .95;
 }
 /* glowing clouds drift and "breathe" in front of the curtains */
 .aurora span {
@@ -819,7 +796,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   height: 38vmax;
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--c), transparent);
-  opacity: var(--o, .5);
+  opacity: calc(var(--o, .5) * .7);
   will-change: transform, opacity;
   animation:
     aurora var(--t, 14s) ease-in-out infinite alternate,
@@ -837,7 +814,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   to { transform: translate(var(--x), calc(var(--y) * -.5)) rotate(calc(var(--r) * .6)) scale(.88, 1.2); }
 }
 @keyframes aurora-glow {
-  50% { opacity: calc(var(--o, .5) * .45); }
+  50% { opacity: calc(var(--o, .5) * .3); }
 }
 /* a soft light veil in the middle keeps the text readable */
 .aurora__veil {
@@ -1198,7 +1175,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
     transition-duration: .01ms !important;
   }
   .marquee__track { animation: none; }
-  .aurora__curtain::before, .aurora__curtain::after, .aurora span { animation: none; }
+  .aurora span { animation: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
 
