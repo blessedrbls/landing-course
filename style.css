@@ -5,9 +5,10 @@
    ========================================================== */
 
 :root {
-  --bg: #f5f7fc;
+  --bg: #fbfcff;
   --surface: #ffffff;
   --tint: #eaeffb;
+  --tint-glass: rgba(226, 233, 250, 0.55);   /* tinted sections let the aurora show through */
   --ink: #0e1220;
   --muted: #5a6275;
   --line: #dfe4ef;
@@ -387,7 +388,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
 
 /* ---------- Sections ---------- */
 .section { padding: clamp(64px, 9vw, 116px) 0; }
-.section--tint { background: var(--tint); }
+.section--tint { background: var(--tint-glass); }
 .section__head { max-width: 700px; margin: 0 auto clamp(36px, 5vw, 56px); text-align: center; }
 .section__head--left { text-align: left; margin-inline: 0; }
 .section__lead { color: var(--muted); font-size: 1.08rem; }
@@ -769,6 +770,35 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
 .footer__bottom a { color: #fff; font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .footer :focus-visible { outline-color: #fff; }
 
+/* ---------- Aurora background ---------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora span {
+  position: absolute;
+  width: 70vmax;
+  height: 34vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--c), transparent);
+  opacity: .5;
+  will-change: transform;
+  animation: aurora var(--t, 22s) ease-in-out infinite alternate;
+}
+.aurora span:nth-child(1) { --c: #5ff0c4; --t: 21s; top: -14vmax; left: -12vmax; --r: -18deg; --x: 16vmax; --y: 6vmax; }
+.aurora span:nth-child(2) { --c: #62c8ff; --t: 26s; top: -8vmax; left: 30vmax; --r: 14deg; --x: -14vmax; --y: 9vmax; }
+.aurora span:nth-child(3) { --c: #9d8bff; --t: 24s; top: 10vmax; right: -22vmax; --r: -32deg; --x: -12vmax; --y: -6vmax; }
+.aurora span:nth-child(4) { --c: #ff9fe0; --t: 30s; bottom: -10vmax; left: 4vmax; --r: 22deg; --x: 18vmax; --y: -8vmax; opacity: .34; }
+.aurora span:nth-child(5) { --c: #7df3d8; --t: 28s; bottom: -16vmax; right: 0; --r: -12deg; --x: -16vmax; --y: -5vmax; opacity: .42; }
+@keyframes aurora {
+  from { transform: translate(0, 0) rotate(var(--r)) scale(1); }
+  50% { transform: translate(calc(var(--x) * .6), var(--y)) rotate(calc(var(--r) * -.4)) scale(1.18, .86); }
+  to { transform: translate(var(--x), calc(var(--y) * -.4)) rotate(calc(var(--r) * .5)) scale(.92, 1.14); }
+}
+
 /* ---------- Reading progress + active nav link ---------- */
 .progress {
   position: absolute;
@@ -785,9 +815,6 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
 .hero__glow {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(620px circle at 88% 8%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 62%),
-    radial-gradient(520px circle at 0% 100%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%);
   pointer-events: none;
 }
 .hero__glow::after {

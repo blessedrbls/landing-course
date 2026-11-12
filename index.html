@@ -13,9 +13,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- TEMP: design variants to compare (variants.css + variant-switcher.js) -->
+  <link rel="stylesheet" href="variants.css">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var v = new URLSearchParams(location.search).get('variant') || localStorage.getItem('pystart-variant');
+        if (v && v !== 'aurora') d.dataset.variant = v;
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+
+  <!-- Decorative "northern lights" background -->
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
 
   <!-- ========== Header ========== -->
   <header class="header" id="header">
@@ -297,5 +311,6 @@ weeks = <span class="c-num">8</span>
   </footer>
 
   <script src="script.js"></script>
+  <script src="variant-switcher.js"></script>
 </body>
 </html>
