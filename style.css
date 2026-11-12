@@ -1,14 +1,14 @@
 /* ==========================================================
    Python з нуля за 8 тижнів — landing page styles
-   Clean modern look: light background, one saturated accent,
-   soft shadows, dark code window and footer for contrast.
+   Frosted-glass cards over an animated aurora background,
+   bento grid, dark code window and footer for contrast.
    ========================================================== */
 
 :root {
   --bg: #fbfcff;
   --surface: #ffffff;
   --tint: #eaeffb;
-  --tint-glass: rgba(226, 233, 250, 0.55);   /* tinted sections let the aurora show through */
+  --tint-glass: transparent;   /* tinted sections let the aurora show through */
   --ink: #0e1220;
   --muted: #5a6275;
   --line: #dfe4ef;
@@ -22,7 +22,7 @@
   --font-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 
-  --radius: 20px;
+  --radius: 28px;
   --radius-sm: 12px;
   --shadow: 0 12px 32px -16px rgba(16, 24, 40, 0.2);
   --shadow-lg: 0 32px 64px -28px rgba(16, 24, 40, 0.38);
@@ -777,26 +777,55 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  background: linear-gradient(180deg, #eafcf6 0%, #eef4ff 45%, #f6efff 100%);
 }
+/* light curtains: long slanted ribbons that slowly slide sideways */
+.aurora__curtain {
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: -10%;
+  width: 260%;
+  background-image:
+    repeating-linear-gradient(104deg, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .9) 2.4%, transparent 4%, transparent 5.2%, rgba(255, 255, 255, .9) 6.8%),
+    repeating-linear-gradient(104deg, #38e0b0 3%, #4cc3ff 6%, #7c7bff 9%, #c58bff 12%, #45e6c8 15%);
+  filter: blur(28px) saturate(1.45);
+  opacity: .62;
+  will-change: transform;
+  /* only transform is animated, so the blurred layer is painted once */
+  animation: curtain 80s ease-in-out infinite alternate;
+}
+@keyframes curtain {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-55%, 0, 0); }
+}
+/* glowing clouds in front of the curtains give the depth */
 .aurora span {
   position: absolute;
-  width: 70vmax;
-  height: 34vmax;
+  width: 78vmax;
+  height: 40vmax;
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--c), transparent);
-  opacity: .5;
+  opacity: .7;
   will-change: transform;
   animation: aurora var(--t, 22s) ease-in-out infinite alternate;
 }
-.aurora span:nth-child(1) { --c: #5ff0c4; --t: 21s; top: -14vmax; left: -12vmax; --r: -18deg; --x: 16vmax; --y: 6vmax; }
-.aurora span:nth-child(2) { --c: #62c8ff; --t: 26s; top: -8vmax; left: 30vmax; --r: 14deg; --x: -14vmax; --y: 9vmax; }
-.aurora span:nth-child(3) { --c: #9d8bff; --t: 24s; top: 10vmax; right: -22vmax; --r: -32deg; --x: -12vmax; --y: -6vmax; }
-.aurora span:nth-child(4) { --c: #ff9fe0; --t: 30s; bottom: -10vmax; left: 4vmax; --r: 22deg; --x: 18vmax; --y: -8vmax; opacity: .34; }
-.aurora span:nth-child(5) { --c: #7df3d8; --t: 28s; bottom: -16vmax; right: 0; --r: -12deg; --x: -16vmax; --y: -5vmax; opacity: .42; }
+.aurora span:nth-of-type(1) { --c: #3fe8b6; --t: 21s; top: -16vmax; left: -14vmax; --r: -18deg; --x: 18vmax; --y: 7vmax; }
+.aurora span:nth-of-type(2) { --c: #45bdff; --t: 26s; top: -10vmax; left: 30vmax; --r: 14deg; --x: -16vmax; --y: 10vmax; }
+.aurora span:nth-of-type(3) { --c: #8d78ff; --t: 24s; top: 8vmax; right: -24vmax; --r: -32deg; --x: -14vmax; --y: -7vmax; }
+.aurora span:nth-of-type(4) { --c: #ff8fdc; --t: 30s; bottom: -12vmax; left: 0; --r: 22deg; --x: 20vmax; --y: -9vmax; opacity: .5; }
+.aurora span:nth-of-type(5) { --c: #56efd0; --t: 28s; bottom: -18vmax; right: -4vmax; --r: -12deg; --x: -18vmax; --y: -6vmax; opacity: .62; }
+.aurora span:nth-of-type(6) { --c: #6f9bff; --t: 34s; top: 28vmax; left: -30vmax; --r: 38deg; --x: 22vmax; --y: -10vmax; opacity: .55; }
 @keyframes aurora {
   from { transform: translate(0, 0) rotate(var(--r)) scale(1); }
-  50% { transform: translate(calc(var(--x) * .6), var(--y)) rotate(calc(var(--r) * -.4)) scale(1.18, .86); }
-  to { transform: translate(var(--x), calc(var(--y) * -.4)) rotate(calc(var(--r) * .5)) scale(.92, 1.14); }
+  50% { transform: translate(calc(var(--x) * .6), var(--y)) rotate(calc(var(--r) * -.4)) scale(1.2, .84); }
+  to { transform: translate(var(--x), calc(var(--y) * -.4)) rotate(calc(var(--r) * .5)) scale(.9, 1.16); }
+}
+/* a soft light veil in the middle keeps the text readable while the edges stay deep */
+.aurora__veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 62% 58% at 50% 46%, rgba(255, 255, 255, .62), rgba(255, 255, 255, .18) 60%, transparent 85%);
 }
 
 /* ---------- Reading progress + active nav link ---------- */
@@ -812,22 +841,6 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
 .nav a.is-active { background: var(--tint); color: var(--ink); }
 
 /* ---------- Hero extras ---------- */
-.hero__glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.hero__glow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 0%, #000 20%, transparent 75%);
-  mask-image: radial-gradient(ellipse 70% 65% at 50% 0%, #000 20%, transparent 75%);
-}
 .hero > .container { position: relative; z-index: 1; }
 .hero__meta { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px 36px; }
 .proof { display: flex; align-items: center; gap: 12px; padding-bottom: 6px; }
@@ -989,6 +1002,79 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   .js .project.reveal.is-visible:hover { transform: translateY(-6px); }
 }
 
+/* ---------- Glass surfaces, bento grid, floating bands ---------- */
+.aurora__curtain { opacity: .72; }
+
+.header { top: 12px; margin-top: 12px; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.header__inner {
+  height: 62px;
+  padding: 0 10px 0 18px;
+  background: rgba(255, 255, 255, .62);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px -18px rgba(16, 24, 40, .4);
+}
+.progress { position: fixed; top: 0; bottom: auto; height: 3px; }
+.btn { border-radius: 999px; }
+.lang,
+.lang__btn { border-radius: 999px; }
+
+:is(.card, .step, .acc, .plan:not(.plan--popular), .review, .stats, .countdown__cell, .badge, .billing, .btn--ghost) {
+  background-color: rgba(255, 255, 255, .55);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, .85) !important;
+  box-shadow: 0 14px 36px -24px rgba(16, 24, 40, .4);
+}
+.acc.is-open { background-color: rgba(255, 255, 255, .8); }
+.acc__topics li { background: rgba(255, 255, 255, .7); }
+
+.hero__title mark {
+  padding: 0 .04em .08em 0;
+  background: linear-gradient(100deg, #2f5bff 0%, #8b5cf6 48%, #10b8a4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  border-radius: 0;
+}
+.blob { background: linear-gradient(140deg, #2f5bff, #8b5cf6 55%, #2fd3b6); border-radius: 40px; }
+
+/* bento grid for the audience cards */
+@media (min-width: 1081px) {
+  .cards { grid-template-columns: repeat(6, 1fr); }
+  .card:nth-child(1),
+  .card:nth-child(4) { grid-column: span 4; }
+  .card:nth-child(2),
+  .card:nth-child(3) { grid-column: span 2; }
+  .card:nth-child(1) h3,
+  .card:nth-child(4) h3 { font-size: 1.6rem; }
+  .card:nth-child(1) p,
+  .card:nth-child(4) p { max-width: 34em; font-size: 1.05rem; }
+}
+.card { padding: 30px 28px; }
+.card:nth-child(1),
+.card:nth-child(1):hover { background: var(--ink); color: #fff; border-color: transparent !important; }
+.card:nth-child(4),
+.card:nth-child(4):hover { background: linear-gradient(120deg, #2f5bff, #7a5cff); color: #fff; border-color: transparent !important; }
+.card:nth-child(1) p { color: #b4bbcf; }
+.card:nth-child(4) p { color: rgba(255, 255, 255, .88); }
+.card:is(:nth-child(1), :nth-child(4)) .card__icon { background: rgba(255, 255, 255, .16); color: #fff; }
+.card:is(:nth-child(1), :nth-child(4)) .card__num { color: rgba(255, 255, 255, .6); }
+
+/* floating rounded bands */
+.marquee { background: none; color: var(--ink); border-block: 1px solid rgba(14, 18, 32, .1); }
+.section--dark,
+.signup { margin-inline: clamp(8px, 1.5vw, 20px); border-radius: clamp(24px, 4vw, 44px); }
+.footer { margin: 16px clamp(8px, 1.5vw, 20px) clamp(8px, 1.5vw, 20px); border-radius: clamp(24px, 4vw, 44px); }
+.teacher__photo::before { background: linear-gradient(140deg, #2f5bff, #8b5cf6 55%, #2fd3b6); }
+.signup { background: linear-gradient(120deg, #2f5bff, #6a4dff 60%, #8b5cf6); }
+
+@media (max-width: 920px) {
+  .nav { left: 20px; right: 20px; margin-top: 8px; border: 1px solid rgba(255, 255, 255, .9); border-radius: 20px; background: rgba(255, 255, 255, .95); }
+}
+
 /* ---------- Reveal animations ---------- */
 .js .reveal {
   opacity: 0;
@@ -1095,6 +1181,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
     transition-duration: .01ms !important;
   }
   .marquee__track { animation: none; }
+  .aurora__curtain { animation: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
 
