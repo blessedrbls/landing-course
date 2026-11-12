@@ -934,43 +934,43 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
-/* ---------- Projects (dark band) ---------- */
-.section--dark { background: var(--ink); color: #fff; }
-.section--dark .section__lead { color: #a9b0c4; }
-.section--dark .eyebrow { background: rgba(255, 255, 255, .1); color: #fff; }
+/* ---------- Projects ---------- */
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .project {
   display: flex;
   flex-direction: column;
-  background: #171c2e;
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 24px;
+  background-color: rgba(255, 255, 255, .68);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 36px -24px rgba(16, 24, 40, .4);
   overflow: hidden;
-  transition: transform .25s ease, border-color .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 .project__media {
   display: grid;
   place-items: center;
   height: 210px;
   padding: 24px;
-  background:
-    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 65%),
-    #1d2338;
+  background: linear-gradient(140deg, rgba(47, 91, 255, .2), rgba(139, 92, 246, .16) 55%, rgba(47, 211, 182, .2));
+  border-bottom: 1px solid rgba(255, 255, 255, .7);
 }
 .project__body { display: flex; flex-direction: column; flex: 1; padding: 24px; }
-.project__tag { align-self: flex-start; margin-bottom: 12px; padding: 4px 10px; border-radius: 8px; background: rgba(255, 255, 255, .08); font: 500 .76rem var(--font-mono); color: #c9cfe0; }
-.project p { color: #a9b0c4; font-size: .97rem; }
+.project__tag { align-self: flex-start; margin-bottom: 12px; padding: 4px 10px; border-radius: 8px; background: var(--accent-soft); font: 500 .76rem var(--font-mono); color: var(--accent-text); }
+.project p { color: var(--muted); font-size: .97rem; }
 .project__stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
-.project__stack li { padding: 4px 11px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 999px; font-size: .82rem; color: #dfe3ef; }
+.project__stack li { padding: 4px 11px; border: 1px solid rgba(14, 18, 32, .14); border-radius: 999px; background: rgba(255, 255, 255, .6); font-size: .82rem; font-weight: 500; }
 
 .mock { width: 100%; max-width: 270px; font: 500 .8rem/1.4 var(--font-mono); }
 .mock--bot { display: flex; flex-direction: column; gap: 7px; }
-.bubble { align-self: flex-start; padding: 7px 12px; border-radius: 14px 14px 14px 4px; background: #fff; color: var(--ink); font-family: var(--font-body); }
+.bubble { align-self: flex-start; padding: 7px 12px; border-radius: 14px 14px 14px 4px; background: #fff; color: var(--ink); font-family: var(--font-body); box-shadow: 0 6px 16px -8px rgba(16, 24, 40, .35); }
 .bubble--me { align-self: flex-end; border-radius: 14px 14px 4px 14px; background: var(--accent); color: var(--on-accent); font-family: var(--font-mono); }
-.mock--term { display: grid; gap: 6px; padding: 16px 18px; border-radius: 14px; background: #0b0e19; border: 1px solid rgba(255, 255, 255, .1); color: #c9cfe0; }
+/* the terminal stays dark on purpose, like the code window in the hero */
+.mock--term { display: grid; gap: 6px; padding: 16px 18px; border-radius: 14px; background: #0f1322; color: #c9cfe0; box-shadow: 0 16px 30px -18px rgba(16, 24, 40, .6); }
 .mock--term .ok { color: #8fe0a8; }
-.mock--chart { display: flex; align-items: flex-end; gap: 10px; height: 150px; padding: 16px 18px 0; border-radius: 14px 14px 0 0; background: #0b0e19; border: 1px solid rgba(255, 255, 255, .1); border-bottom: 0; align-self: end; }
-.mock--chart i { flex: 1; height: var(--h); border-radius: 6px 6px 0 0; background: rgba(255, 255, 255, .22); transform-origin: bottom; transition: transform .9s cubic-bezier(.2, .8, .2, 1); }
+.mock--chart { display: flex; align-items: flex-end; gap: 10px; height: 150px; padding: 16px 18px 0; border-radius: 14px 14px 0 0; background: rgba(255, 255, 255, .8); box-shadow: 0 16px 30px -18px rgba(16, 24, 40, .4); align-self: end; }
+.mock--chart i { flex: 1; height: var(--h); border-radius: 6px 6px 0 0; background: rgba(14, 18, 32, .14); transform-origin: bottom; transition: transform .9s cubic-bezier(.2, .8, .2, 1); }
 .mock--chart i:last-child { background: var(--accent); }
 .js .project.reveal:not(.is-visible) .mock--chart i { transform: scaleY(0); }
 .project:has(.mock--chart) .project__media { padding-bottom: 0; }
@@ -993,14 +993,14 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
 
 /* ---------- Cursor glow on cards ---------- */
 @media (hover: hover) {
-  .card:hover, .review:hover, .step:hover, .plan:not(.plan--popular):hover {
+  .card:hover, .review:hover, .step:hover, .project:hover, .plan:not(.plan--popular):hover {
     background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%);
   }
-  .project:hover, .plan--popular:hover {
+  .plan--popular:hover {
     background-image: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%);
   }
-  .project:hover { transform: translateY(-6px); border-color: rgba(255, 255, 255, .2); }
-  .js .project.reveal.is-visible { transition: transform .25s ease, border-color .25s ease, opacity .7s ease; transition-delay: 0ms; }
+  .project:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .js .project.reveal.is-visible { transition: transform .25s ease, box-shadow .25s ease, opacity .7s ease; transition-delay: 0ms; }
   .js .project.reveal.is-visible:hover { transform: translateY(-6px); }
 }
 

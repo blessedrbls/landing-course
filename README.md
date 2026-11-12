@@ -16,7 +16,7 @@ https://blessedrbls.github.io/landing-course/
 - **Accordions** for the 8-week curriculum and the FAQ, keyboard accessible (`aria-expanded`, `aria-controls`).
 - **Pricing** with three plans; the middle one is highlighted as the most popular. "Choose plan" buttons pre-select the plan in the form.
 - **Signup form** with client-side validation (name, email, phone, plan), localized error messages and a success state. No data is sent anywhere — see the comment in the `submit` handler in `script.js` for where to connect a backend.
-- **Extra sections**: how the course works (4 steps) and a dark showcase of student projects with CSS-only mock-ups.
+- **Extra sections**: how the course works (4 steps) and a showcase of student projects with CSS-only mock-ups.
 - **Interactive details**: self-typing code in the hero, count-up stats, reading progress bar, active nav link, a program timeline that fills on scroll, a full / two-part payment toggle, cursor glow on cards.
 - **Scroll reveal animations** via `IntersectionObserver`, disabled for users with `prefers-reduced-motion`.
 - Light design with an animated aurora (northern lights) background, frosted-glass cards, a bento grid, a dark code window and a running-line strip.
