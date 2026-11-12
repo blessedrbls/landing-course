@@ -1003,25 +1003,25 @@
 
     function draw(time) {
       const t = time / 1000;
-      easedX += (pointerX - easedX) * 0.04;
+      easedX += (pointerX - easedX) * 0.06;
       easedY += (pointerY - easedY) * 0.04;
       ctx.clearRect(0, 0, w, h);
 
       RIBBONS.forEach((r, ri) => {
-        const lean = (easedX - 0.5) * 0.35 * (ri % 2 ? -1 : 1);
+        const lean = (easedX - 0.5) * 0.7 * (ri % 2 ? -1 : 1);
         const lift = (easedY - 0.5) * 0.06 + scrollShift * (0.05 + ri * 0.03);
         for (let x = 0; x <= w; x += 2) {
           const u = x / w;
           // the curtain line slowly folds and travels sideways
           const fold =
-            Math.sin(u * r.wave * 3.1 + t * r.speed * 2.2 + r.phase + lean * 4) * 0.07 +
-            Math.sin(u * r.wave * 7.3 - t * r.speed * 3.4 + r.phase * 1.7) * 0.03;
+            Math.sin(u * r.wave * 3.1 + t * r.speed * 5.5 + r.phase + lean * 4) * 0.12 +
+            Math.sin(u * r.wave * 7.3 - t * r.speed * 7 + r.phase * 1.7) * 0.045;
           const base = (r.y + fold - lift) * h;
           // rays: height and brightness shimmer along the curtain
-          const ray = 0.55 + 0.45 * Math.sin(u * 46 + t * 1.6 * (r.speed > 0 ? 1 : -1) + r.phase * 3);
-          const pulse = 0.6 + 0.4 * Math.sin(u * 9 - t * 0.7 + r.phase);
-          const top = base - r.height * h * (0.55 + 0.45 * ray);
-          const alpha = r.alpha * pulse * (0.45 + 0.55 * ray);
+          const ray = 0.5 + 0.5 * Math.sin(u * 38 + t * 2.6 * (r.speed > 0 ? 1 : -1) + r.phase * 3);
+          const pulse = 0.5 + 0.5 * Math.sin(u * 7 - t * 1.5 + r.phase);
+          const top = base - r.height * h * (0.4 + 0.6 * ray);
+          const alpha = r.alpha * (0.25 + 0.75 * pulse) * (0.35 + 0.65 * ray);
           const grad = ctx.createLinearGradient(0, base + h * 0.04, 0, top);
           grad.addColorStop(0, rgba(r.a, 0));
           grad.addColorStop(0.12, rgba(r.a, alpha));
