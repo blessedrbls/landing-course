@@ -44,6 +44,7 @@
         subtitle: 'Від першого рядка коду до власного проєкту в портфоліо. Живі заняття двічі на тиждень, практика після кожної теми та відповіді на всі запитання.',
         cta: 'Записатися на курс',
         secondary: 'Дивитися програму',
+        proof: '600+ випускників',
         chipWeeks: 'тижнів<br>навчання',
         chipTasks: 'практичних<br>завдань'
       },
@@ -80,6 +81,27 @@
           { icon: 'chart', title: 'Аналітикам і менеджерам', text: 'Втомилися від рутини в таблицях і хочете автоматизувати звіти та обробку даних.' }
         ]
       },
+      process: {
+        eyebrow: 'Формат',
+        title: 'Як проходить навчання',
+        lead: 'Жодної теорії заради теорії: кожен тиждень побудований навколо практики.',
+        steps: [
+          { icon: 'video', title: 'Живі заняття', text: 'Двічі на тиждень по 1,5 години онлайн. Пишемо код разом із викладачем, запис лишається в кабінеті.' },
+          { icon: 'code', title: 'Практика', text: 'Після кожної теми — завдання з автоперевіркою. Помилки видно одразу, а не через тиждень.' },
+          { icon: 'chat', title: 'Зворотний звʼязок', text: 'Ментор перевіряє домашні завдання та відповідає в чаті групи протягом дня.' },
+          { icon: 'flag', title: 'Власний проєкт', text: 'На фініші ви збираєте проєкт, отримуєте код-ревʼю та викладаєте його на GitHub.' }
+        ]
+      },
+      projects: {
+        eyebrow: 'Проєкти',
+        title: 'Що ви створите за 8 тижнів',
+        lead: 'Три роботи, які не соромно показати на співбесіді. Усі — у вашому GitHub.',
+        items: [
+          { mock: 'bot', tag: 'Тиждень 7', title: 'Telegram-бот', text: 'Бот, який показує погоду та курси валют за командою. Працює з реальними API.', stack: ['requests', 'API', 'JSON'] },
+          { mock: 'term', tag: 'Тиждень 5', title: 'Збирач даних', text: 'Скрипт, що читає файли, чистить дані й зберігає акуратний звіт у CSV.', stack: ['CSV', 'файли', 'try / except'] },
+          { mock: 'chart', tag: 'Тиждень 8', title: 'Фінальний проєкт', text: 'Ваша власна ідея — від трекера витрат до мінігри. З ревʼю викладача й презентацією.', stack: ['ООП', 'Git', 'GitHub'] }
+        ]
+      },
       program: {
         eyebrow: 'Програма',
         title: '8 тижнів — 8 кроків до результату',
@@ -113,16 +135,20 @@
         popular: 'Найпопулярніший',
         per: 'за весь курс',
         choose: 'Обрати тариф',
+        payFull: 'Оплата одразу',
+        paySplit: 'Двома частинами',
+        perSplit: 'два платежі, без переплат',
         currency: '₴',
         plans: [
-          { id: 'basic', name: 'Базовий', price: '4 900', desc: 'Для тих, хто звик вчитися самостійно.', features: ['Записи всіх 16 занять', 'Практичні завдання з автоперевіркою', 'Доступ до матеріалів на 6 місяців', 'Спільний чат групи'] },
-          { id: 'standard', name: 'Стандарт', price: '8 900', desc: 'Живе навчання зі зворотним зв’язком.', features: ['Усе з тарифу «Базовий»', 'Живі заняття двічі на тиждень', 'Перевірка домашніх завдань ментором', 'Ревʼю фінального проєкту', 'Сертифікат про проходження'] },
-          { id: 'premium', name: 'Преміум', price: '14 900', desc: 'Максимум уваги та допомога зі стартом кар’єри.', features: ['Усе з тарифу «Стандарт»', '4 індивідуальні консультації', 'Допомога з резюме та GitHub', 'Тренувальна співбесіда', 'Безстроковий доступ до матеріалів'] }
+          { id: 'basic', name: 'Базовий', price: '4 900', split: '2 450', desc: 'Для тих, хто звик вчитися самостійно.', features: ['Записи всіх 16 занять', 'Практичні завдання з автоперевіркою', 'Доступ до матеріалів на 6 місяців', 'Спільний чат групи'] },
+          { id: 'standard', name: 'Стандарт', price: '8 900', split: '4 450', desc: 'Живе навчання зі зворотним зв’язком.', features: ['Усе з тарифу «Базовий»', 'Живі заняття двічі на тиждень', 'Перевірка домашніх завдань ментором', 'Ревʼю фінального проєкту', 'Сертифікат про проходження'] },
+          { id: 'premium', name: 'Преміум', price: '14 900', split: '7 450', desc: 'Максимум уваги та допомога зі стартом кар’єри.', features: ['Усе з тарифу «Стандарт»', '4 індивідуальні консультації', 'Допомога з резюме та GitHub', 'Тренувальна співбесіда', 'Безстроковий доступ до матеріалів'] }
         ]
       },
       reviews: {
         eyebrow: 'Відгуки',
         title: 'Що кажуть випускники',
+        summary: 'середня оцінка від 214 випускників',
         items: [
           { name: 'Марина К.', role: 'бухгалтерка → QA-інженерка', text: 'Боялася, що програмування — це не моє. На третьому тижні вже написала скрипт, який звіряє звіти замість мене. Пояснення дуже людяні.' },
           { name: 'Дмитро С.', role: 'студент 2-го курсу', text: 'В університеті Python давали сухо й швидко. Тут нарешті все склалося в голові, а фінальний проєкт — Telegram-бот — я показав на співбесіді на стажування.' },
@@ -195,6 +221,7 @@
         subtitle: 'From your first line of code to a project in your portfolio. Live classes twice a week, practice after every topic and answers to all your questions.',
         cta: 'Enroll in the course',
         secondary: 'View curriculum',
+        proof: '600+ graduates',
         chipWeeks: 'weeks of<br>learning',
         chipTasks: 'practice<br>tasks'
       },
@@ -231,6 +258,27 @@
           { icon: 'chart', title: 'Analysts and managers', text: 'You are tired of spreadsheet routine and want to automate reports and data processing.' }
         ]
       },
+      process: {
+        eyebrow: 'Format',
+        title: 'How the course works',
+        lead: 'No theory for the sake of theory: every week is built around practice.',
+        steps: [
+          { icon: 'video', title: 'Live classes', text: 'Twice a week, 1.5 hours online. We write code together with the instructor, and the recording stays in your account.' },
+          { icon: 'code', title: 'Practice', text: 'Auto-checked tasks after every topic. You see mistakes right away, not a week later.' },
+          { icon: 'chat', title: 'Feedback', text: 'A mentor reviews your homework and answers in the group chat within a day.' },
+          { icon: 'flag', title: 'Your own project', text: 'At the finish you build a project, get a code review and publish it on GitHub.' }
+        ]
+      },
+      projects: {
+        eyebrow: 'Projects',
+        title: 'What you will build in 8 weeks',
+        lead: 'Three pieces of work you can show at an interview. All of them in your GitHub.',
+        items: [
+          { mock: 'bot', tag: 'Week 7', title: 'Telegram bot', text: 'A bot that shows the weather and exchange rates on command. Works with real APIs.', stack: ['requests', 'API', 'JSON'] },
+          { mock: 'term', tag: 'Week 5', title: 'Data collector', text: 'A script that reads files, cleans the data and saves a tidy report to CSV.', stack: ['CSV', 'files', 'try / except'] },
+          { mock: 'chart', tag: 'Week 8', title: 'Final project', text: 'Your own idea — from an expense tracker to a mini-game. With the instructor’s review and a presentation.', stack: ['OOP', 'Git', 'GitHub'] }
+        ]
+      },
       program: {
         eyebrow: 'Curriculum',
         title: '8 weeks — 8 steps to the result',
@@ -264,16 +312,20 @@
         popular: 'Most popular',
         per: 'for the whole course',
         choose: 'Choose plan',
+        payFull: 'Pay in full',
+        paySplit: 'In two parts',
+        perSplit: 'two payments, no extra cost',
         currency: '₴',
         plans: [
-          { id: 'basic', name: 'Basic', price: '4,900', desc: 'For those who are used to learning on their own.', features: ['Recordings of all 16 classes', 'Auto-checked practice tasks', '6 months of access to materials', 'Group chat'] },
-          { id: 'standard', name: 'Standard', price: '8,900', desc: 'Live learning with feedback.', features: ['Everything in Basic', 'Live classes twice a week', 'Homework reviewed by a mentor', 'Final project review', 'Certificate of completion'] },
-          { id: 'premium', name: 'Premium', price: '14,900', desc: 'Maximum attention and help with starting your career.', features: ['Everything in Standard', '4 one-on-one consultations', 'Help with your CV and GitHub', 'Mock interview', 'Lifetime access to materials'] }
+          { id: 'basic', name: 'Basic', price: '4,900', split: '2,450', desc: 'For those who are used to learning on their own.', features: ['Recordings of all 16 classes', 'Auto-checked practice tasks', '6 months of access to materials', 'Group chat'] },
+          { id: 'standard', name: 'Standard', price: '8,900', split: '4,450', desc: 'Live learning with feedback.', features: ['Everything in Basic', 'Live classes twice a week', 'Homework reviewed by a mentor', 'Final project review', 'Certificate of completion'] },
+          { id: 'premium', name: 'Premium', price: '14,900', split: '7,450', desc: 'Maximum attention and help with starting your career.', features: ['Everything in Standard', '4 one-on-one consultations', 'Help with your CV and GitHub', 'Mock interview', 'Lifetime access to materials'] }
         ]
       },
       reviews: {
         eyebrow: 'Reviews',
         title: 'What graduates say',
+        summary: 'average rating from 214 graduates',
         items: [
           { name: 'Maryna K.', role: 'accountant → QA engineer', text: 'I was afraid programming wasn’t for me. By week three I had written a script that reconciles reports for me. The explanations are very human.' },
           { name: 'Dmytro S.', role: 'second-year student', text: 'At university Python was taught dry and fast. Here it finally clicked, and I showed my final project — a Telegram bot — at an internship interview.' },
@@ -337,6 +389,10 @@
     seed: '<path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 5-3 8-8 7z"/><path d="M12 15c0-3-2-5-7-5 0 4 3 6 7 5z"/>',
     swap: '<path d="M4 8h14"/><path d="M14 4l4 4-4 4"/><path d="M20 16H6"/><path d="M10 12l-4 4 4 4"/>',
     cap: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.500V16c0 1.500 3 3 6 3s6-1.500 6-3v-4.500"/><path d="M22 9v6"/>',
+    video: '<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',
+    code: '<path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13 6l-2 12"/>',
+    chat: '<path d="M4 5h16v11H9l-5 4z"/>',
+    flag: '<path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/>',
     chart: '<path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4"/><path d="M12 16V8"/><path d="M16 16v-6"/>'
   };
   const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.500l2.900 6 6.600.900-4.800 4.600 1.200 6.500L12 17.400l-5.900 3.100 1.200-6.500L2.500 9.400l6.600-.900z"/></svg>';
@@ -407,7 +463,7 @@
 
   function renderStats() {
     $('#stats').innerHTML = t.stats.map((s) =>
-      `<li><strong>${escapeHtml(s.value)}</strong><span>${escapeHtml(s.label)}</span></li>`
+      `<li><strong data-count="${escapeHtml(s.value)}">${escapeHtml(s.value)}</strong><span>${escapeHtml(s.label)}</span></li>`
     ).join('');
   }
 
@@ -426,6 +482,36 @@
         <div class="card__icon"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[card.icon]}</svg></div>
         <h3>${escapeHtml(card.title)}</h3>
         <p>${escapeHtml(card.text)}</p>
+      </article>`).join('');
+  }
+
+  function renderSteps() {
+    $('#steps').innerHTML = t.process.steps.map((step, i) => `
+      <li class="step reveal" style="--delay:${i * 100}ms">
+        <div class="step__icon"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[step.icon]}</svg></div>
+        <span class="step__num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+        <h3>${escapeHtml(step.title)}</h3>
+        <p>${escapeHtml(step.text)}</p>
+      </li>`).join('');
+  }
+
+  // Small CSS-only "screenshots" for the project cards
+  const MOCKS = {
+    bot: '<div class="mock mock--bot"><span class="bubble bubble--me">/weather Kyiv</span><span class="bubble">☀️ +18°C, clear sky</span><span class="bubble bubble--me">/usd</span><span class="bubble">💵 41.20 ₴</span></div>',
+    term: '<div class="mock mock--term"><span>$ python collect.py</span><span class="ok">✓ sales.csv — 1 284 rows</span><span class="ok">✓ removed 37 duplicates</span><span>→ report.csv saved</span></div>',
+    chart: '<div class="mock mock--chart"><i style="--h:34%"></i><i style="--h:52%"></i><i style="--h:44%"></i><i style="--h:70%"></i><i style="--h:60%"></i><i style="--h:92%"></i></div>'
+  };
+
+  function renderProjects() {
+    $('#projectList').innerHTML = t.projects.items.map((item, i) => `
+      <article class="project reveal" style="--delay:${i * 110}ms">
+        <div class="project__media" aria-hidden="true">${MOCKS[item.mock]}</div>
+        <div class="project__body">
+          <span class="project__tag">${escapeHtml(item.tag)}</span>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+          <ul class="project__stack">${item.stack.map((x) => `<li>${escapeHtml(x)}</li>`).join('')}</ul>
+        </div>
       </article>`).join('');
   }
 
@@ -467,13 +553,14 @@
   function renderPlans() {
     $('#plans').innerHTML = t.pricing.plans.map((plan, i) => {
       const popular = plan.id === 'standard';
+      const split = billing === 'split';
       return `
         <article class="plan${popular ? ' plan--popular' : ''} reveal" style="--delay:${i * 110}ms">
           ${popular ? `<span class="plan__flag">${escapeHtml(t.pricing.popular)}</span>` : ''}
           <h3 class="plan__name">${escapeHtml(plan.name)}</h3>
           <p class="plan__desc">${escapeHtml(plan.desc)}</p>
-          <p class="plan__price">${escapeHtml(plan.price)}<small>${escapeHtml(t.pricing.currency)}</small></p>
-          <p class="plan__per">${escapeHtml(t.pricing.per)}</p>
+          <p class="plan__price">${escapeHtml(split ? plan.split : plan.price)}<small>${escapeHtml(t.pricing.currency)}${split ? ' × 2' : ''}</small></p>
+          <p class="plan__per">${escapeHtml(split ? t.pricing.perSplit : t.pricing.per)}</p>
           <ul class="plan__features">${plan.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('')}</ul>
           <a href="#signup" class="btn ${popular ? 'btn--primary' : 'btn--ghost'} btn--block" data-plan="${plan.id}">${escapeHtml(t.pricing.choose)}</a>
         </article>`;
@@ -514,6 +601,8 @@
     renderStats();
     renderMarquee();
     renderAudience();
+    renderSteps();
+    renderProjects();
     renderProgram();
     renderTeacher();
     renderPlans();
@@ -523,6 +612,7 @@
     updateCountdown();
     refreshFormMessages();
     observeReveals();
+    requestScrollUpdate();
   }
 
   function setLang(next) {
@@ -530,6 +620,7 @@
     lang = next;
     t = I18N[lang];
     storeLang(lang);
+    typer.stop();
     renderAll();
   }
 
@@ -569,6 +660,7 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+            runCountUp(entry.target);
             revealObserver.unobserve(entry.target);
           }
         });
@@ -745,6 +837,135 @@
   /* ----------------------------------------------------------
      Init
      ---------------------------------------------------------- */
+  /* ----------------------------------------------------------
+     Extras: pricing toggle, count-up, scroll effects, spotlight,
+     code typing
+     ---------------------------------------------------------- */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let billing = 'full';
+
+  $$('.billing__btn').forEach((btn) => btn.addEventListener('click', () => {
+    billing = btn.dataset.billing;
+    $$('.billing__btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    renderPlans();
+    $$('#plans .reveal').forEach((el) => el.classList.add('is-visible'));
+  }));
+
+  // Numbers in the stats strip count up once when they scroll into view
+  function runCountUp(root) {
+    if (reduceMotion) return;
+    $$('[data-count]', root).forEach((el) => {
+      const match = el.dataset.count.match(/^(\d+)(.*)$/);
+      if (!match) return;
+      const target = Number(match[1]);
+      const suffix = match[2];
+      const started = performance.now();
+      (function frame(now) {
+        const progress = Math.min(1, (now - started) / 1100);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(frame);
+      })(started);
+    });
+  }
+
+  // Reading progress bar, program timeline and active nav link
+  const progressBar = $('#scrollProgress');
+  const timeline = $('#programList');
+  const navLinks = $$('.nav a');
+  const navTargets = navLinks.map((link) => $(link.getAttribute('href')));
+  let scrollQueued = false;
+
+  function updateOnScroll() {
+    scrollQueued = false;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.setProperty('--p', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
+
+    const mark = window.innerHeight * 0.6;
+    const rect = timeline.getBoundingClientRect();
+    const passed = Math.min(1, Math.max(0, (mark - rect.top) / rect.height));
+    timeline.style.setProperty('--progress', passed.toFixed(3));
+    $$('.acc', timeline).forEach((item) => {
+      item.classList.toggle('is-passed', item.getBoundingClientRect().top + 28 < mark);
+    });
+
+    let active = -1;
+    navTargets.forEach((section, i) => {
+      if (section && section.getBoundingClientRect().top < window.innerHeight * 0.4) active = i;
+    });
+    navLinks.forEach((link, i) => link.classList.toggle('is-active', i === active));
+  }
+
+  function requestScrollUpdate() {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    requestAnimationFrame(updateOnScroll);
+  }
+  window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+  window.addEventListener('resize', requestScrollUpdate);
+
+  // Soft glow that follows the cursor on cards
+  document.addEventListener('pointermove', (event) => {
+    const card = event.target.closest && event.target.closest('.card, .plan, .review, .project, .step');
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (event.clientX - rect.left) + 'px');
+    card.style.setProperty('--my', (event.clientY - rect.top) + 'px');
+  });
+
+  // Slight 3D tilt of the code window
+  const heroVisual = $('.hero__visual');
+  const codeWindow = $('.code-window');
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    heroVisual.addEventListener('pointermove', (event) => {
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      codeWindow.style.transform = `perspective(900px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 7).toFixed(2)}deg)`;
+    });
+    heroVisual.addEventListener('pointerleave', () => { codeWindow.style.transform = ''; });
+  }
+
+  // The code in the hero "types itself" once on load
+  const typer = (function () {
+    const code = $('.code-window__body code');
+    const output = $('.code-window__out');
+    let timer = null;
+    let nodes = [];
+
+    function stop() {
+      if (timer) clearTimeout(timer);
+      timer = null;
+      nodes.forEach((item) => { item.node.data = item.text; });
+      nodes = [];
+      output.classList.remove('is-waiting');
+    }
+
+    function start() {
+      if (reduceMotion) return;
+      const body = code.parentElement;
+      body.style.minHeight = body.offsetHeight + 'px';
+      const walker = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) nodes.push({ node: walker.currentNode, text: walker.currentNode.data });
+      nodes.forEach((item) => { item.node.data = ''; });
+      output.classList.add('is-waiting');
+
+      let index = 0;
+      let chars = 0;
+      (function tick() {
+        if (index >= nodes.length) { stop(); return; }
+        const item = nodes[index];
+        chars += 2;
+        item.node.data = item.text.slice(0, chars);
+        if (chars >= item.text.length) { index += 1; chars = 0; }
+        timer = setTimeout(tick, 26);
+      })();
+    }
+
+    return { start, stop };
+  })();
+
   renderAll();
   setInterval(updateCountdown, 1000);
+  setTimeout(typer.start, 600);
 })();

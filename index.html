@@ -19,6 +19,7 @@
 
   <!-- ========== Header ========== -->
   <header class="header" id="header">
+    <div class="progress" id="scrollProgress" aria-hidden="true"></div>
     <div class="container header__inner">
       <a href="#top" class="logo" aria-label="PyStart">
         <svg class="logo__mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect width="64" height="64" rx="16"/><path d="M24 22 14 32l10 10M40 22l10 10-10 10"/><path d="M35 18 29 46"/></svg>
@@ -51,6 +52,7 @@
 
     <!-- ========== 1. Hero ========== -->
     <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
       <div class="container hero__grid">
         <div class="hero__content">
           <p class="badge reveal"><span class="badge__dot"></span><span id="heroBadge"></span></p>
@@ -62,7 +64,8 @@
             <a href="#program" class="btn btn--ghost btn--lg" data-i18n="hero.secondary"></a>
           </div>
 
-          <div class="countdown reveal" aria-live="off">
+          <div class="hero__meta reveal">
+          <div class="countdown" aria-live="off">
             <p class="countdown__label" id="countdownLabel"></p>
             <div class="countdown__grid" id="countdown">
               <div class="countdown__cell"><span class="countdown__num" data-unit="days">00</span><span class="countdown__unit" data-i18n="countdown.days"></span></div>
@@ -70,6 +73,11 @@
               <div class="countdown__cell"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__unit" data-i18n="countdown.minutes"></span></div>
               <div class="countdown__cell"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__unit" data-i18n="countdown.seconds"></span></div>
             </div>
+          </div>
+          <div class="proof">
+            <div class="proof__avatars" aria-hidden="true"><span>МК</span><span>ДС</span><span>ІВ</span><span>+</span></div>
+            <p><strong><span class="stars" aria-hidden="true">★★★★★</span> 4.9</strong><span data-i18n="hero.proof"></span></p>
+          </div>
           </div>
         </div>
 
@@ -120,8 +128,20 @@ weeks = <span class="c-num">8</span>
       </div>
     </section>
 
+    <!-- ========== How the course works ========== -->
+    <section class="section section--tint" id="process">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="process.eyebrow"></p>
+          <h2 data-i18n="process.title"></h2>
+          <p class="section__lead" data-i18n="process.lead"></p>
+        </header>
+        <ol class="steps" id="steps"></ol>
+      </div>
+    </section>
+
     <!-- ========== 3. Program ========== -->
-    <section class="section section--tint" id="program">
+    <section class="section" id="program">
       <div class="container program">
         <header class="section__head section__head--left reveal">
           <p class="eyebrow" data-i18n="program.eyebrow"></p>
@@ -129,7 +149,19 @@ weeks = <span class="c-num">8</span>
           <p class="section__lead" data-i18n="program.lead"></p>
           <a href="#signup" class="btn btn--primary" data-i18n="program.cta"></a>
         </header>
-        <div class="accordion reveal" id="programList"></div>
+        <div class="accordion accordion--timeline reveal" id="programList"></div>
+      </div>
+    </section>
+
+    <!-- ========== Projects ========== -->
+    <section class="section section--dark" id="projects">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow" data-i18n="projects.eyebrow"></p>
+          <h2 data-i18n="projects.title"></h2>
+          <p class="section__lead" data-i18n="projects.lead"></p>
+        </header>
+        <div class="projects" id="projectList"></div>
       </div>
     </section>
 
@@ -157,6 +189,10 @@ weeks = <span class="c-num">8</span>
           <p class="eyebrow" data-i18n="pricing.eyebrow"></p>
           <h2 data-i18n="pricing.title"></h2>
           <p class="section__lead" data-i18n="pricing.lead"></p>
+          <div class="billing" role="group">
+            <button type="button" class="billing__btn" data-billing="full" aria-pressed="true" data-i18n="pricing.payFull"></button>
+            <button type="button" class="billing__btn" data-billing="split" aria-pressed="false" data-i18n="pricing.paySplit"></button>
+          </div>
         </header>
         <div class="plans" id="plans"></div>
       </div>
@@ -168,6 +204,7 @@ weeks = <span class="c-num">8</span>
         <header class="section__head reveal">
           <p class="eyebrow" data-i18n="reviews.eyebrow"></p>
           <h2 data-i18n="reviews.title"></h2>
+          <p class="rating"><strong>4.9</strong><span class="stars" aria-hidden="true">★★★★★</span><span data-i18n="reviews.summary"></span></p>
         </header>
         <div class="reviews" id="reviewList"></div>
       </div>
