@@ -778,56 +778,72 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(180deg, #d3faec 0%, #dbe8ff 45%, #eddcff 100%);
+  background: linear-gradient(180deg, #e6fbf3 0%, #e9f0ff 45%, #f3eaff 100%);
 }
-/* light curtains: long slanted ribbons that slowly slide sideways */
-.aurora__curtain {
+/* two layers of light curtains that sway in opposite directions */
+.aurora__curtain::before,
+.aurora__curtain::after {
+  content: "";
   position: absolute;
-  top: -12%;
-  bottom: -12%;
-  left: -10%;
-  width: 260%;
-  background-image:
-    repeating-linear-gradient(104deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .5) 1.6%, transparent 3.4%, transparent 5.6%, rgba(255, 255, 255, .5) 6.8%),
-    repeating-linear-gradient(104deg, #12dc9c 3%, #1f9dff 6%, #6452ff 9%, #b45cff 12%, #14e0c2 15%);
-  filter: blur(24px) saturate(1.7);
-  opacity: .95;
+  top: -15%;
+  bottom: -15%;
+  left: -20%;
+  width: 240%;
+  filter: blur(44px);
   will-change: transform;
-  /* only transform is animated, so the blurred layer is painted once */
-  animation: curtain 80s ease-in-out infinite alternate;
 }
-@keyframes curtain {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-55%, 0, 0); }
+.aurora__curtain::before {
+  background-image: repeating-linear-gradient(104deg, #4fe3b4 0%, #63c4ff 5%, #8c86ff 10%, #c79cff 15%, #4fe3b4 20%);
+  opacity: .5;
+  animation: curtain-a 26s ease-in-out infinite alternate;
 }
-/* glowing clouds in front of the curtains give the depth */
+.aurora__curtain::after {
+  background-image: repeating-linear-gradient(78deg, transparent 0%, #6fe9d2 6%, transparent 12%, #7aa2ff 18%, transparent 24%);
+  opacity: .42;
+  animation: curtain-b 34s ease-in-out infinite alternate;
+}
+@keyframes curtain-a {
+  from { transform: translate3d(0, 0, 0) skewX(0deg) scaleY(1); }
+  50% { transform: translate3d(-22%, 2%, 0) skewX(-7deg) scaleY(1.08); }
+  to { transform: translate3d(-44%, -1%, 0) skewX(5deg) scaleY(.96); }
+}
+@keyframes curtain-b {
+  from { transform: translate3d(-46%, 0, 0) skewX(6deg) scaleY(1.05); }
+  50% { transform: translate3d(-20%, -2%, 0) skewX(-5deg) scaleY(.94); }
+  to { transform: translate3d(0, 1%, 0) skewX(3deg) scaleY(1.1); }
+}
+/* glowing clouds drift and "breathe" in front of the curtains */
 .aurora span {
   position: absolute;
-  width: 78vmax;
-  height: 40vmax;
+  width: 74vmax;
+  height: 38vmax;
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--c), transparent);
-  opacity: .92;
-  mix-blend-mode: multiply;
-  will-change: transform;
-  animation: aurora var(--t, 22s) ease-in-out infinite alternate;
+  opacity: var(--o, .5);
+  will-change: transform, opacity;
+  animation:
+    aurora var(--t, 14s) ease-in-out infinite alternate,
+    aurora-glow calc(var(--t, 14s) * .62) ease-in-out infinite;
 }
-.aurora span:nth-of-type(1) { --c: #14e3a4; --t: 21s; top: -16vmax; left: -14vmax; --r: -18deg; --x: 18vmax; --y: 7vmax; }
-.aurora span:nth-of-type(2) { --c: #25a4ff; --t: 26s; top: -10vmax; left: 30vmax; --r: 14deg; --x: -16vmax; --y: 10vmax; }
-.aurora span:nth-of-type(3) { --c: #7455ff; --t: 24s; top: 8vmax; right: -24vmax; --r: -32deg; --x: -14vmax; --y: -7vmax; }
-.aurora span:nth-of-type(4) { --c: #ff62cc; --t: 30s; bottom: -12vmax; left: 0; --r: 22deg; --x: 20vmax; --y: -9vmax; opacity: .75; }
-.aurora span:nth-of-type(5) { --c: #1fe6c4; --t: 28s; bottom: -18vmax; right: -4vmax; --r: -12deg; --x: -18vmax; --y: -6vmax; opacity: .88; }
-.aurora span:nth-of-type(6) { --c: #4a80ff; --t: 34s; top: 28vmax; left: -30vmax; --r: 38deg; --x: 22vmax; --y: -10vmax; opacity: .8; }
+.aurora span:nth-of-type(1) { --c: #4fe6ba; --t: 13s; --o: .6; top: -16vmax; left: -14vmax; --r: -18deg; --x: 22vmax; --y: 9vmax; }
+.aurora span:nth-of-type(2) { --c: #5cc2ff; --t: 17s; --o: .55; top: -10vmax; left: 30vmax; --r: 14deg; --x: -20vmax; --y: 12vmax; }
+.aurora span:nth-of-type(3) { --c: #9a88ff; --t: 15s; --o: .5; top: 8vmax; right: -24vmax; --r: -32deg; --x: -18vmax; --y: -9vmax; }
+.aurora span:nth-of-type(4) { --c: #ff9fde; --t: 19s; --o: .38; bottom: -12vmax; left: 0; --r: 22deg; --x: 24vmax; --y: -11vmax; }
+.aurora span:nth-of-type(5) { --c: #63ecd2; --t: 16s; --o: .5; bottom: -18vmax; right: -4vmax; --r: -12deg; --x: -22vmax; --y: -8vmax; }
+.aurora span:nth-of-type(6) { --c: #7ea4ff; --t: 21s; --o: .45; top: 28vmax; left: -30vmax; --r: 38deg; --x: 26vmax; --y: -12vmax; }
 @keyframes aurora {
   from { transform: translate(0, 0) rotate(var(--r)) scale(1); }
-  50% { transform: translate(calc(var(--x) * .6), var(--y)) rotate(calc(var(--r) * -.4)) scale(1.2, .84); }
-  to { transform: translate(var(--x), calc(var(--y) * -.4)) rotate(calc(var(--r) * .5)) scale(.9, 1.16); }
+  50% { transform: translate(calc(var(--x) * .6), var(--y)) rotate(calc(var(--r) * -.5)) scale(1.25, .8); }
+  to { transform: translate(var(--x), calc(var(--y) * -.5)) rotate(calc(var(--r) * .6)) scale(.88, 1.2); }
 }
-/* a soft light veil in the middle keeps the text readable while the edges stay deep */
+@keyframes aurora-glow {
+  50% { opacity: calc(var(--o, .5) * .45); }
+}
+/* a soft light veil in the middle keeps the text readable */
 .aurora__veil {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 58% 52% at 50% 46%, rgba(255, 255, 255, .3), rgba(255, 255, 255, .08) 60%, transparent 85%);
+  background: radial-gradient(ellipse 64% 58% at 50% 46%, rgba(255, 255, 255, .5), rgba(255, 255, 255, .16) 60%, transparent 88%);
 }
 
 /* ---------- Reading progress + active nav link ---------- */
@@ -1182,7 +1198,7 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
     transition-duration: .01ms !important;
   }
   .marquee__track { animation: none; }
-  .aurora__curtain { animation: none; }
+  .aurora__curtain::before, .aurora__curtain::after, .aurora span { animation: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
 
