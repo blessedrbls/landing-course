@@ -139,6 +139,7 @@
         paySplit: 'Двома частинами',
         perSplit: 'два платежі, без переплат',
         currency: '₴',
+        currencyFirst: false,   // 4 900 ₴
         plans: [
           { id: 'basic', name: 'Базовий', price: '4 900', split: '2 450', desc: 'Для тих, хто звик вчитися самостійно.', features: ['Записи всіх 16 занять', 'Практичні завдання з автоперевіркою', 'Доступ до матеріалів на 6 місяців', 'Спільний чат групи'] },
           { id: 'standard', name: 'Стандарт', price: '8 900', split: '4 450', desc: 'Живе навчання зі зворотним зв’язком.', features: ['Усе з тарифу «Базовий»', 'Живі заняття двічі на тиждень', 'Перевірка домашніх завдань ментором', 'Ревʼю фінального проєкту', 'Сертифікат про проходження'] },
@@ -315,11 +316,12 @@
         payFull: 'Pay in full',
         paySplit: 'In two parts',
         perSplit: 'two payments, no extra cost',
-        currency: '₴',
+        currency: '$',
+        currencyFirst: true,    // $120
         plans: [
-          { id: 'basic', name: 'Basic', price: '4,900', split: '2,450', desc: 'For those who are used to learning on their own.', features: ['Recordings of all 16 classes', 'Auto-checked practice tasks', '6 months of access to materials', 'Group chat'] },
-          { id: 'standard', name: 'Standard', price: '8,900', split: '4,450', desc: 'Live learning with feedback.', features: ['Everything in Basic', 'Live classes twice a week', 'Homework reviewed by a mentor', 'Final project review', 'Certificate of completion'] },
-          { id: 'premium', name: 'Premium', price: '14,900', split: '7,450', desc: 'Maximum attention and help with starting your career.', features: ['Everything in Standard', '4 one-on-one consultations', 'Help with your CV and GitHub', 'Mock interview', 'Lifetime access to materials'] }
+          { id: 'basic', name: 'Basic', price: '120', split: '60', desc: 'For those who are used to learning on their own.', features: ['Recordings of all 16 classes', 'Auto-checked practice tasks', '6 months of access to materials', 'Group chat'] },
+          { id: 'standard', name: 'Standard', price: '220', split: '110', desc: 'Live learning with feedback.', features: ['Everything in Basic', 'Live classes twice a week', 'Homework reviewed by a mentor', 'Final project review', 'Certificate of completion'] },
+          { id: 'premium', name: 'Premium', price: '360', split: '180', desc: 'Maximum attention and help with starting your career.', features: ['Everything in Standard', '4 one-on-one consultations', 'Help with your CV and GitHub', 'Mock interview', 'Lifetime access to materials'] }
         ]
       },
       reviews: {
@@ -550,6 +552,17 @@
     $('#teacherFacts').innerHTML = t.teacher.facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('');
   }
 
+  // "$120" in English, "4 900 ₴" in Ukrainian
+  function priceText(value) {
+    return t.pricing.currencyFirst ? t.pricing.currency + value : value + ' ' + t.pricing.currency;
+  }
+  function priceHtml(value) {
+    const cur = escapeHtml(t.pricing.currency);
+    return t.pricing.currencyFirst
+      ? `<small class="plan__cur plan__cur--first">${cur}</small>${escapeHtml(value)}`
+      : `${escapeHtml(value)}<small class="plan__cur">${cur}</small>`;
+  }
+
   function renderPlans() {
     $('#plans').innerHTML = t.pricing.plans.map((plan, i) => {
       const popular = plan.id === 'standard';
@@ -559,7 +572,7 @@
           ${popular ? `<span class="plan__flag">${escapeHtml(t.pricing.popular)}</span>` : ''}
           <h3 class="plan__name">${escapeHtml(plan.name)}</h3>
           <p class="plan__desc">${escapeHtml(plan.desc)}</p>
-          <p class="plan__price">${escapeHtml(split ? plan.split : plan.price)}<small>${escapeHtml(t.pricing.currency)}${split ? ' × 2' : ''}</small></p>
+          <p class="plan__price">${priceHtml(split ? plan.split : plan.price)}${split ? '<small>× 2</small>' : ''}</p>
           <p class="plan__per">${escapeHtml(split ? t.pricing.perSplit : t.pricing.per)}</p>
           <ul class="plan__features">${plan.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('')}</ul>
           <a href="#signup" class="btn ${popular ? 'btn--primary' : 'btn--ghost'} btn--block" data-plan="${plan.id}">${escapeHtml(t.pricing.choose)}</a>
@@ -572,7 +585,7 @@
     select.innerHTML =
       `<option value="">${escapeHtml(t.form.planPlaceholder)}</option>` +
       t.pricing.plans.map((plan) =>
-        `<option value="${plan.id}">${escapeHtml(plan.name)} — ${escapeHtml(plan.price)} ${escapeHtml(t.pricing.currency)}</option>`
+        `<option value="${plan.id}">${escapeHtml(plan.name)} — ${escapeHtml(priceText(plan.price))}</option>`
       ).join('');
     select.value = current;
   }
