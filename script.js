@@ -16,8 +16,8 @@
      ---------------------------------------------------------- */
   const COURSE_START = '2026-12-07T19:00:00+02:00';
 
-  const DEFAULT_LANG = 'uk';
-  const STORAGE_KEY = 'pystart-lang';
+  const DEFAULT_LANG = 'en';
+  const STORAGE_KEY = 'pystart-lang-v2';   // v2: English became the default
   const DEV_LINK = '<a href="https://t.me/nonelyyo" target="_blank" rel="noopener">@nonelyyo</a>';
 
   /* ----------------------------------------------------------

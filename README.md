@@ -10,7 +10,7 @@ https://blessedrbls.github.io/landing-course/
 
 ## Features
 
-- **Two languages** — Ukrainian (default) and English, switchable in the header; the choice is remembered in `localStorage`. All texts live in one `I18N` object in `script.js`.
+- **Two languages** — English (default) and Ukrainian, switchable in the header; the choice is remembered in `localStorage`. All texts live in one `I18N` object in `script.js`.
 - **Countdown timer** to the course start. The date is set in a single variable (`COURSE_START` at the top of `script.js`); the hero badge is derived from it.
 - **Fully responsive** layout with a mobile burger menu.
 - **Accordions** for the 8-week curriculum and the FAQ, keyboard accessible (`aria-expanded`, `aria-controls`).
