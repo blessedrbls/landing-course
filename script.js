@@ -598,6 +598,7 @@
 
   function renderAll() {
     renderStatic();
+    splitHeadings();
     renderStats();
     renderMarquee();
     renderAudience();
@@ -661,6 +662,7 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
             runCountUp(entry.target);
+            runScramble(entry.target);
             revealObserver.unobserve(entry.target);
           }
         });
@@ -849,6 +851,11 @@
     $$('.billing__btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
     renderPlans();
     $$('#plans .reveal').forEach((el) => el.classList.add('is-visible'));
+    // prices flip in when the payment mode changes
+    const plans = $('#plans');
+    plans.classList.remove('is-switching');
+    void plans.offsetWidth;
+    plans.classList.add('is-switching');
   }));
 
   // Numbers in the stats strip count up once when they scroll into view
@@ -894,6 +901,8 @@
       if (section && section.getBoundingClientRect().top < window.innerHeight * 0.4) active = i;
     });
     navLinks.forEach((link, i) => link.classList.toggle('is-active', i === active));
+
+    motion.onScroll();
   }
 
   function requestScrollUpdate() {
@@ -1074,6 +1083,159 @@
     if (reduceMotion) draw(8000);   // one still frame
     else requestAnimationFrame(loop);
     return { draw };
+  })();
+
+  /* ----------------------------------------------------------
+     Motion layer: word-by-word headings, scrambled labels,
+     magnetic buttons, 3D card tilt, cursor light, scroll effects
+     ---------------------------------------------------------- */
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Wrap every word of a heading so it can rise out of its own mask
+  function splitHeadings() {
+    $$('.hero__title, .section__head h2, .teacher__body h2, .signup__text h2').forEach((heading) => {
+      let index = 0;
+      const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+      const textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+      textNodes.forEach((node) => {
+        const parts = node.data.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const word = document.createElement('span');
+          word.className = 'w';
+          const inner = document.createElement('span');
+          inner.className = 'w__i';
+          inner.style.setProperty('--i', index++);
+          inner.textContent = part;
+          word.appendChild(inner);
+          frag.appendChild(word);
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+    });
+  }
+
+  // Section labels "decode" from random symbols when they appear
+  const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#01';
+  function runScramble(root) {
+    if (reduceMotion) return;
+    $$('.eyebrow', root).forEach((el) => {
+      const target = el.textContent;
+      const started = performance.now();
+      const duration = 700;
+      (function frame(now) {
+        if (el.textContent.length !== target.length && now !== started) return; // text was replaced (language switch)
+        const progress = Math.min(1, (now - started) / duration);
+        const shown = Math.floor(target.length * progress);
+        el.textContent = target.split('').map((ch, i) => {
+          if (i < shown || ch === ' ') return ch;
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }).join('');
+        if (progress < 1) requestAnimationFrame(frame);
+        else el.textContent = target;
+      })(started);
+    });
+  }
+
+  const motion = (function () {
+    const glow = $('.aurora__cursor');
+    const hero = $('.hero');
+    const heroContent = $('.hero__content');
+    const heroVisualEl = $('.hero__visual');
+    const marqueeGroups = () => $$('.marquee__group');
+    let marqueeAnim = null;
+    let lastScrollY = window.scrollY;
+    let velocity = 0;
+    let glowX = window.innerWidth * 0.7;
+    let glowY = window.innerHeight * 0.3;
+    let targetX = glowX;
+    let targetY = glowY;
+    let magnet = null;
+    let tilted = null;
+
+    // Buttons lean towards the cursor
+    function resetMagnet() {
+      if (!magnet) return;
+      magnet.style.translate = '';
+      magnet = null;
+    }
+    // Cards tilt in 3D under the cursor
+    function resetTilt() {
+      if (!tilted) return;
+      tilted.style.transform = '';
+      tilted = null;
+    }
+
+    if (canHover && !reduceMotion) {
+      document.addEventListener('pointermove', (event) => {
+        targetX = event.clientX;
+        targetY = event.clientY;
+        glow && glow.classList.add('is-on');
+
+        const btn = event.target.closest('.btn, .socials a');
+        if (btn !== magnet) resetMagnet();
+        if (btn) {
+          const r = btn.getBoundingClientRect();
+          const dx = event.clientX - (r.left + r.width / 2);
+          const dy = event.clientY - (r.top + r.height / 2);
+          btn.style.translate = `${(dx * 0.22).toFixed(1)}px ${(dy * 0.32).toFixed(1)}px`;
+          magnet = btn;
+        }
+
+        const card = event.target.closest('.card, .step, .plan, .review, .project');
+        if (card !== tilted) resetTilt();
+        if (card && (!card.classList.contains('reveal') || card.classList.contains('is-visible'))) {
+          const r = card.getBoundingClientRect();
+          const x = (event.clientX - r.left) / r.width - 0.5;
+          const y = (event.clientY - r.top) / r.height - 0.5;
+          const max = r.width > 420 ? 3 : 7;
+          card.style.transform = `perspective(1000px) rotateX(${(-y * max).toFixed(2)}deg) rotateY(${(x * max).toFixed(2)}deg) translateY(-6px)`;
+          tilted = card;
+        }
+      }, { passive: true });
+      document.addEventListener('pointerleave', () => {
+        resetMagnet();
+        resetTilt();
+        glow && glow.classList.remove('is-on');
+      });
+    }
+
+    // Runs every frame: cursor light easing and marquee speed decay
+    function tick() {
+      requestAnimationFrame(tick);
+      if (glow) {
+        glowX += (targetX - glowX) * 0.12;
+        glowY += (targetY - glowY) * 0.12;
+        glow.style.transform = `translate3d(${glowX.toFixed(1)}px, ${glowY.toFixed(1)}px, 0)`;
+      }
+      velocity *= 0.9;
+      if (!marqueeAnim) {
+        const track = $('.marquee__track');
+        marqueeAnim = track && track.getAnimations ? track.getAnimations()[0] : null;
+      }
+      if (marqueeAnim) marqueeAnim.playbackRate = 1 + Math.min(Math.abs(velocity) * 0.18, 6);
+      const skew = Math.max(-8, Math.min(8, velocity * 0.25));
+      marqueeGroups().forEach((g) => { g.style.transform = `skewX(${(-skew).toFixed(2)}deg)`; });
+    }
+
+    // Hero drifts apart as you scroll past it
+    function onScroll() {
+      const y = window.scrollY;
+      velocity += (y - lastScrollY) * 0.5;
+      lastScrollY = y;
+      if (reduceMotion) return;
+      const heroHeight = hero.offsetHeight;
+      const p = Math.min(1, Math.max(0, y / heroHeight));
+      heroContent.style.translate = `0 ${(p * 70).toFixed(1)}px`;
+      heroContent.style.opacity = (1 - p * 0.7).toFixed(3);
+      heroVisualEl.style.translate = `0 ${(p * -50).toFixed(1)}px`;
+    }
+
+    if (!reduceMotion) requestAnimationFrame(tick);
+    return { onScroll };
   })();
 
   renderAll();

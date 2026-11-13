@@ -1071,6 +1071,87 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
   .nav { left: 20px; right: 20px; margin-top: 8px; border: 1px solid rgba(255, 255, 255, .9); border-radius: 20px; background: rgba(255, 255, 255, .95); }
 }
 
+/* ---------- Motion layer ---------- */
+/* page intro */
+.header { animation: header-in .9s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes header-in { from { opacity: 0; transform: translateY(-24px); } }
+.aurora { animation: aurora-in 1.6s ease both; }
+@keyframes aurora-in { from { opacity: 0; } }
+
+/* headings rise word by word out of their own mask */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.w__i {
+  display: inline-block;
+  transform: translateY(105%) rotate(4deg);
+  opacity: 0;
+  filter: blur(6px);
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1), opacity .6s ease, filter .7s ease;
+  transition-delay: calc(var(--i, 0) * 60ms + 80ms);
+}
+.is-visible .w__i,
+html:not(.js) .w__i { transform: none; opacity: 1; filter: none; }
+/* the reveal of the heading block itself becomes a gentle fade, the words do the motion */
+.js .section__head.reveal,
+.js .hero__title.reveal { transform: none; }
+
+/* cursor light that warms the aurora under the pointer */
+.aurora__cursor {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(126, 232, 210, .55), rgba(140, 134, 255, .3) 45%, transparent 75%);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity .6s ease;
+  will-change: transform;
+}
+.aurora__cursor.is-on { opacity: 1; }
+
+/* magnetic buttons and tilting cards ease back smoothly */
+.btn, .socials a { transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, translate .35s cubic-bezier(.2, .8, .2, 1); }
+.card, .step, .plan, .review, .project { transform-style: preserve-3d; }
+.js .card.reveal.is-visible,
+.js .step.reveal.is-visible,
+.js .plan.reveal.is-visible,
+.js .review.reveal.is-visible,
+.js .project.reveal.is-visible { transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease, border-color .25s ease, opacity .7s ease; transition-delay: 0ms; }
+.card__icon, .step__icon { transition: transform .35s cubic-bezier(.2, .8, .2, 1), background-color .25s ease, color .25s ease; }
+.card:hover .card__icon, .step:hover .step__icon { transform: translateZ(30px) scale(1.06); }
+
+/* light sweep across primary buttons */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .8s ease;
+}
+.btn--primary:hover::before { transform: translateX(120%); }
+
+/* prices flip when the payment mode changes */
+.plans.is-switching .plan__price,
+.plans.is-switching .plan__per { animation: price-flip .5s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes price-flip {
+  from { opacity: 0; transform: translateY(14px) rotateX(-70deg); filter: blur(4px); }
+}
+
+/* topics inside an opened week pop in one after another */
+.acc.is-open .acc__topics li { animation: topic-in .45s cubic-bezier(.2, .8, .2, 1) both; }
+.acc.is-open .acc__topics li:nth-child(2) { animation-delay: .06s; }
+.acc.is-open .acc__topics li:nth-child(3) { animation-delay: .12s; }
+.acc.is-open .acc__topics li:nth-child(4) { animation-delay: .18s; }
+@keyframes topic-in { from { opacity: 0; transform: translateY(10px) scale(.94); } }
+
+/* marquee reacts to scroll speed (JS sets playbackRate and skew) */
+.marquee__group { transition: transform .15s linear; }
+
 /* ---------- Reveal animations ---------- */
 .js .reveal {
   opacity: 0;
@@ -1177,6 +1258,8 @@ h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.0
     transition-duration: .01ms !important;
   }
   .marquee__track { animation: none; }
+  .w__i { transform: none; opacity: 1; filter: none; }
+  .aurora__cursor { display: none; }
   .aurora span { animation: none; }
   .js .reveal { opacity: 1; transform: none; }
 }
