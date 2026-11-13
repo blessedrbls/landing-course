@@ -11,3 +11,6 @@ Thumbs.db
 # Dependencies and logs (not used, but just in case)
 node_modules/
 *.log
+
+# Demo recordings (large files, not part of the site)
+video/
