@@ -10,7 +10,7 @@ https://blessedrbls.github.io/landing-course/
 
 ## Demo video
 
-A 48-second walkthrough of the page and its animations (1920×1080, 60 fps): [video/pystart-demo-1080p60.mp4](video/pystart-demo-1080p60.mp4)
+Demo video: coming soon
 
 ## Features
 
@@ -39,7 +39,6 @@ index.html     markup
 style.css      styles
 script.js      texts (uk / en) and all logic
 images/        teacher photo and favicon
-video/         demo recording of the page
 ```
 
 ## How to run
