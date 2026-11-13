@@ -1137,10 +1137,11 @@ html:not(.js) .w__i { transform: none; opacity: 1; filter: none; }
 .btn--primary:hover::before { transform: translateX(120%); }
 
 /* prices flip when the payment mode changes */
-.plans.is-switching .plan__price,
-.plans.is-switching .plan__per { animation: price-flip .5s cubic-bezier(.2, .8, .2, 1) both; }
+.plan__price.is-flipping,
+.plan__per.is-flipping { animation: price-flip .45s cubic-bezier(.2, .8, .2, 1); transform-origin: 50% 100%; }
+.plan__per.is-flipping { animation-delay: .05s; animation-fill-mode: backwards; }
 @keyframes price-flip {
-  from { opacity: 0; transform: translateY(14px) rotateX(-70deg); filter: blur(4px); }
+  from { opacity: 0; transform: perspective(400px) translateY(12px) rotateX(-60deg); filter: blur(3px); }
 }
 
 /* topics inside an opened week pop in one after another */

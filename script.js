@@ -563,17 +563,42 @@
       : `${escapeHtml(value)}<small class="plan__cur">${cur}</small>`;
   }
 
+  function planPriceHtml(plan) {
+    const split = billing === 'split';
+    return priceHtml(split ? plan.split : plan.price) + (split ? '<small>× 2</small>' : '');
+  }
+  function planPerText() {
+    return escapeHtml(billing === 'split' ? t.pricing.perSplit : t.pricing.per);
+  }
+
+  // Swap the numbers inside the existing cards and let them flip in
+  function updatePrices(animate) {
+    $$('#plans .plan').forEach((card, i) => {
+      const plan = t.pricing.plans[i];
+      const price = $('.plan__price', card);
+      const per = $('.plan__per', card);
+      price.innerHTML = planPriceHtml(plan);
+      per.innerHTML = planPerText();
+      if (animate && !reduceMotion) {
+        [price, per].forEach((el) => {
+          el.classList.toggle('is-flipping', false);
+          void el.offsetWidth;   // restart the animation
+          el.classList.toggle('is-flipping', true);
+        });
+      }
+    });
+  }
+
   function renderPlans() {
     $('#plans').innerHTML = t.pricing.plans.map((plan, i) => {
       const popular = plan.id === 'standard';
-      const split = billing === 'split';
       return `
         <article class="plan${popular ? ' plan--popular' : ''} reveal" style="--delay:${i * 110}ms">
           ${popular ? `<span class="plan__flag">${escapeHtml(t.pricing.popular)}</span>` : ''}
           <h3 class="plan__name">${escapeHtml(plan.name)}</h3>
           <p class="plan__desc">${escapeHtml(plan.desc)}</p>
-          <p class="plan__price">${priceHtml(split ? plan.split : plan.price)}${split ? '<small>× 2</small>' : ''}</p>
-          <p class="plan__per">${escapeHtml(split ? t.pricing.perSplit : t.pricing.per)}</p>
+          <p class="plan__price">${planPriceHtml(plan)}</p>
+          <p class="plan__per">${planPerText()}</p>
           <ul class="plan__features">${plan.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('')}</ul>
           <a href="#signup" class="btn ${popular ? 'btn--primary' : 'btn--ghost'} btn--block" data-plan="${plan.id}">${escapeHtml(t.pricing.choose)}</a>
         </article>`;
@@ -862,13 +887,9 @@
   $$('.billing__btn').forEach((btn) => btn.addEventListener('click', () => {
     billing = btn.dataset.billing;
     $$('.billing__btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-    renderPlans();
-    $$('#plans .reveal').forEach((el) => el.classList.add('is-visible'));
-    // prices flip in when the payment mode changes
-    const plans = $('#plans');
-    plans.classList.remove('is-switching');
-    void plans.offsetWidth;
-    plans.classList.add('is-switching');
+    // update only the prices in place: the cards stay as they are,
+    // so their reveal, hover and tilt states are not interrupted
+    updatePrices(true);
   }));
 
   // Numbers in the stats strip count up once when they scroll into view
