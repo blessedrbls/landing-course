@@ -12,5 +12,3 @@ Thumbs.db
 node_modules/
 *.log
 
-# Demo recordings (large files, not part of the site)
-video/
